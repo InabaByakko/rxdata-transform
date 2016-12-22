@@ -1,5 +1,7 @@
-class Table
+require 'oj'
 
+class Table
+  include Oj::Hashable
   def initialize(data)
     @num_of_dimensions, @xsize, @ysize, @zsize, @num_of_elements, *@elements = *data
     if @num_of_dimensions > 1

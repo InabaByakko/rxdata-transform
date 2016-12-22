@@ -1,5 +1,7 @@
-class Tone
+require 'oj'
 
+class Tone
+  include Oj::Hashable
   attr_accessor :red, :green, :blue, :gray
 
   def initialize(red, green, blue, gray=0)

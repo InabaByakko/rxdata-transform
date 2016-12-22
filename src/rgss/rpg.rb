@@ -1,6 +1,8 @@
+require 'oj'
+
 module RPG ; end
 
-class RPG::ObjectBase ; end
+class RPG::ObjectBase ; include Oj::Hashable; end
 class RPG::Map < RPG::ObjectBase ; end
 class RPG::Map::Encounter < RPG::ObjectBase ; end
 class RPG::MapInfo < RPG::ObjectBase ; end

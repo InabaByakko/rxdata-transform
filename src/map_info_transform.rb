@@ -8,19 +8,19 @@ class MapInfoTransform
   end
 
   def to_h
-    @infos.zip(@configs).map {|(id, info), (_, config)|
+    Hash[@infos.zip(@configs).map {|(id, info), (_, config)|
       config.each {|key, value| info.instance_variable_set(:"@#{key}", value) }
       [id, info]
-    }.to_h
+    }]
   end
 
   def self.apply(rxdata)
-    infos = rxdata.sort_by(&:first).map {|id, info|
+    infos = Hash[rxdata.sort_by(&:first).map {|id, info|
       ['^#%X' % id, [id, info.to_hash]]
-    }.to_h
-    configs = infos.map {|sig, (id, info)|
-      [sig, [id, %w(expanded scroll_x scroll_y).map {|ex| [ex, info.delete(ex)]}.to_h]]
-    }.to_h
+    }]
+    configs = Hash[infos.map {|sig, (id, info)|
+      [sig, [id, Hash[%w(expanded scroll_x scroll_y).map {|ex| [ex, info.delete(ex)]}]]]
+    }]
     self.new(infos, configs)
   end
 

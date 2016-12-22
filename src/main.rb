@@ -27,12 +27,14 @@ when 'import'
 when 'export'
   path = ARGV.shift
   if path
-    Tone.include(Oj::Hashable)
-    Table.include(Oj::Hashable)
-    Color.include(Oj::Hashable)
-    RPG::ObjectBase.include(Oj::Hashable)
+    #Tone.include(Oj::Hashable)
+    #Table.include(Oj::Hashable)
+    #Color.include(Oj::Hashable)
+    #RPG::ObjectBase.include(Oj::Hashable)
     Oj.default_options = { indent: 2, mode: :compat }
-    path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    if !File::ALT_SEPARATOR.nil?
+      path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    end
     exporter = Rxdata::Exporter.new(path)
     exporter.export
   end

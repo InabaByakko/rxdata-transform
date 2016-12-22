@@ -26,17 +26,23 @@ module Rxdata
         when 'MapInfos'
           map_info = MapInfoTransform.apply(rxdata)
           config_json = @output + name.sub_ext('.config.json')
-          config_json.write(Oj.dump(map_info.configs), mode: 'w')
+          #config_json.write(Oj.dump(map_info.configs), mode: 'w')
+          File.open(config_json.to_path, 'w') do |file|
+            file.write(Oj.dump(rxdata))
+          end
           rxdata = map_info.infos
         when /^Map\d+$/
-          events = rxdata.instance_variable_get(:@events).sort_by(&:first).map {|key, value|
+          events = Hash[rxdata.instance_variable_get(:@events).sort_by(&:first).map {|key, value|
             ['^#%X' % key, [key, value]]
-          }.to_h
+          }]
           rxdata.instance_variable_set(:@events, events)
         else
         end
         json = @output + name.sub_ext('.json')
-        json.write(Oj.dump(rxdata), mode: 'w')
+        #json.write(Oj.dump(rxdata), mode: 'w')
+        File.open(json.to_path, 'w') do |file|
+          file.write(Oj.dump(rxdata))
+        end
         json.utime(path.atime, path.mtime)
       end
       puts
@@ -45,7 +51,10 @@ module Rxdata
 
     def export_script(file, script)
       rb = @output + 'Scripts' + (ScriptTransform.normalize_filename(file) + '.rb')
-      rb.write(script, mode: 'wb')
+      #rb.write(script, mode: 'wb')
+      File.open(rb.to_path, 'wb') do |file|
+        file.write(script)
+      end
     end
 
   end

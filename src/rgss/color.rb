@@ -1,5 +1,6 @@
+require 'oj'
 class Color
-
+  include Oj::Hashable
   attr_accessor :red, :green, :blue, :alpha
 
   def initialize(red, green, blue, alpha=255)

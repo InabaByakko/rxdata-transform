@@ -21,13 +21,13 @@ class ScriptTransform
   end
 
   def self.apply(rxdata)
-    self.new(rxdata.map {|id, name, script|
+    self.new(Hash[rxdata.map {|id, name, script|
       name.force_encoding('UTF-8')
       name   = '!' if name.empty?
       file   = name + '#' + id.to_s
       script = Zlib::Inflate.inflate(script)
       [id, [name, file, script]]
-    }.to_h)
+    }])
   end
 
   def to_rxdata
