@@ -28,7 +28,7 @@ module Rxdata
           config_json = @output + name.sub_ext('.config.json')
           #config_json.write(Oj.dump(map_info.configs), mode: 'w')
           File.open(config_json.to_path, 'w') do |file|
-            file.write(Oj.dump(rxdata))
+            file.write(Oj.dump(map_info.configs))
           end
           rxdata = map_info.infos
         when /^Map\d+$/
