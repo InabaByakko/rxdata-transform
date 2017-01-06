@@ -20,8 +20,9 @@ module Rxdata
         data = Oj.load(json)
         case name.to_s
         when 'Scripts'
-          transform = ScriptTransform.new(data.map(&method(:import_script)).to_h)
-          data = transform.to_rxdata
+          #transform = ScriptTransform.new(data.map(&method(:import_script)).to_h)
+          #data = transform.to_rxdata
+          break
         when 'MapInfos'
           config_json = @input + name.sub_ext('.config.json')
           configs = Oj.load(config_json.read(mode: 'r:utf-8'))

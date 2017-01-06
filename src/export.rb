@@ -20,9 +20,10 @@ module Rxdata
         rxdata = Marshal.load(path.read(mode: 'rb'))
         case name.to_s
         when 'Scripts'
-          transform = ScriptTransform.apply(rxdata)
-          transform.each {|id, (name, file, script)| export_script(file, script) }
-          rxdata = transform.index
+          #transform = ScriptTransform.apply(rxdata)
+          #transform.each {|id, (name, file, script)| export_script(file, script) }
+          #rxdata = transform.index
+          break
         when 'MapInfos'
           map_info = MapInfoTransform.apply(rxdata)
           config_json = @output + name.sub_ext('.config.json')
