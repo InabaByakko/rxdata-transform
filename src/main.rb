@@ -42,7 +42,7 @@ when 'clean'
   path = ARGV.shift
   if path
     path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
-    FileUtils.rm_r(path, force:true, secure: true) if Dir.exist?(path)
+    FileUtils.rm_r(path, force: true, secure: true) if Dir.exist?(path)
     FileUtils.mkdir_p(path)
   end
 end
