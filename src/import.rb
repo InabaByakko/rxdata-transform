@@ -30,7 +30,10 @@ module Rxdata
           data = map_info.to_h
         end
         rxdata = @output + name.sub_ext(Rxdata::EXT)
-        rxdata.write(Marshal.dump(data), mode: 'wb')
+        #rxdata.write(Marshal.dump(data), mode: 'wb')
+        File.open(rxdata.to_path, 'wb') do |file|
+          file.write(Marshal.dump(data))
+        end
         rxdata.utime(path.atime, path.mtime)
       end
       puts
