@@ -20,17 +20,15 @@ case command
 when 'import'
   path = ARGV.shift
   if path
-    path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    if !File::ALT_SEPARATOR.nil?
+      path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    end
     importer = Rxdata::Importer.new(path)
     importer.import
   end
 when 'export'
   path = ARGV.shift
   if path
-    #Tone.include(Oj::Hashable)
-    #Table.include(Oj::Hashable)
-    #Color.include(Oj::Hashable)
-    #RPG::ObjectBase.include(Oj::Hashable)
     Oj.default_options = { indent: 2, mode: :compat }
     if !File::ALT_SEPARATOR.nil?
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
@@ -41,7 +39,9 @@ when 'export'
 when 'clean'
   path = ARGV.shift
   if path
-    path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    if !File::ALT_SEPARATOR.nil?
+      path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    end
     FileUtils.rm_r(path, force: true, secure: true) if Dir.exist?(path)
     FileUtils.mkdir_p(path)
   end
