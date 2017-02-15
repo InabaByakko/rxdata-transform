@@ -23,6 +23,11 @@ when 'import'
     if !File::ALT_SEPARATOR.nil?
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
     end
+    if !Dir.glob("#{path}#{File::SEPARATOR}*.rvproj2").empty?
+      Rxdata::EXT = ".rvdata2"
+      RPG.module_eval { remove_const :State }
+      class RPG::State < RPG::BaseItem ; end 
+    end
     importer = Rxdata::Importer.new(path)
     importer.import
   end
@@ -33,6 +38,12 @@ when 'export'
     if !File::ALT_SEPARATOR.nil?
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
     end
+    if !Dir.glob("#{path}#{File::SEPARATOR}*.rvproj2").empty?
+      Rxdata::EXT = ".rvdata2"
+      RPG.module_eval { remove_const :State }
+      class RPG::State < RPG::BaseItem ; end 
+    end
+    puts Rxdata::EXT
     exporter = Rxdata::Exporter.new(path)
     exporter.export
   end
@@ -41,6 +52,11 @@ when 'clean'
   if path
     if !File::ALT_SEPARATOR.nil?
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+    end
+    if !Dir.glob("#{path}#{File::SEPARATOR}*.rvproj2").empty?
+      Rxdata::EXT = ".rvdata2"
+      RPG.module_eval { remove_const :State }
+      class RPG::State < RPG::BaseItem ; end 
     end
     FileUtils.rm_r(path, force: true, secure: true) if Dir.exist?(path)
     FileUtils.mkdir_p(path)

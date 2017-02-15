@@ -39,3 +39,17 @@ class RPG::System < RPG::ObjectBase ; end
 class RPG::System::Words < RPG::ObjectBase ; end
 class RPG::System::TestBattler < RPG::ObjectBase ; end
 class RPG::AudioFile < RPG::ObjectBase ; end
+
+# 以下VXAce要素
+class RPG::BGM < RPG::AudioFile ; end
+class RPG::BGS < RPG::AudioFile ; end
+class RPG::SE < RPG::AudioFile ; end
+class RPG::ME < RPG::AudioFile ; end
+class RPG::BaseItem::Feature < RPG::ObjectBase ; end
+class RPG::Enemy::DropItem < RPG::ObjectBase ; end
+class RPG::UsableItem::Effect < RPG::ObjectBase ; end
+class RPG::UsableItem::Damage < RPG::ObjectBase ; end
+class RPG::System::Vehicle < RPG::ObjectBase ; end
+class RPG::System::Terms < RPG::ObjectBase ; end
+class RPG::System::TestBattler < RPG::ObjectBase ; end
+
