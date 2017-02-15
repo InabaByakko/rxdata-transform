@@ -43,7 +43,6 @@ when 'export'
       RPG.module_eval { remove_const :State }
       class RPG::State < RPG::BaseItem ; end 
     end
-    puts Rxdata::EXT
     exporter = Rxdata::Exporter.new(path)
     exporter.export
   end
