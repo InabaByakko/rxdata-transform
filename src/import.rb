@@ -23,6 +23,8 @@ module Rxdata
           #transform = ScriptTransform.new(data.map(&method(:import_script)).to_h)
           #data = transform.to_rxdata
           break
+        when 'MapInfos.config'
+          next
         when 'MapInfos'
           config_json = @input + name.sub_ext('.config.json')
           configs = Oj.load(config_json.read(mode: 'r:utf-8'))
